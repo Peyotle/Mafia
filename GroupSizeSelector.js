@@ -12,6 +12,7 @@ import {
   StyleSheet
 } from 'react-native';
 
+var RoleSelection = require('./RoleSelection.js');
 
 class GroupSizeSelector extends Component {
   constructor(props) {
@@ -28,17 +29,14 @@ class GroupSizeSelector extends Component {
     }
   }
 
-  componentDidMount(){
-
-  }
-
   render() {
     return(
-      <ListView
-        style = {styles.listView}
-        dataSource={this.state.dataSource}
-        renderRow={this.renderRow.bind(this)}
-      />
+      <View style={styles.container}>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this.renderRow.bind(this)}
+        />
+      </View>
     );
   }
 
@@ -58,8 +56,8 @@ class GroupSizeSelector extends Component {
 
   pressRow(rowData) {
     this.props.navigator.push({
-      title: 'Push Event',
-      component: PushPayload,
+      title: 'Roles',
+      component: RoleSelection,
       passProps: {
         pushEvent: rowData
       }
@@ -68,13 +66,9 @@ class GroupSizeSelector extends Component {
 
 }
 
-
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    flex: 1
   },
   cell: {
     flex: 1,
@@ -84,11 +78,6 @@ const styles = StyleSheet.create({
     borderColor: '#D7D7D7',
     borderBottomWidth: 1,
     backgroundColor: '#fff'
-  },
-  title: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 20,
   }
 });
 

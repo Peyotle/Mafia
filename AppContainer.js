@@ -27,17 +27,9 @@ class AppContainer extends Component {
         }}
         initialRoute={{
           component: GroupSizeSelector,
-          title: 'GroupSizeSelector'
+          title: 'Group Size'
         }}
       />
-
-      // <View>
-      //   <Text style={styles.title}>
-      //     Select the number of players
-      //   </Text>
-      //
-      //   <GroupSizeSelector />
-      // </View>
     );
   }
 
