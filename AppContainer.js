@@ -27,7 +27,9 @@ class AppContainer extends Component {
         }}
         initialRoute={{
           component: GroupSizeSelector,
-          title: 'Group Size'
+          title: 'Group Size',
+          rightButtonTitle: 'Add',
+          onRightButtonPress: () => this._handleNavigationRequest(),
         }}
       />
     );

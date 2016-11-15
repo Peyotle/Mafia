@@ -82,25 +82,27 @@ class RoleSelection extends Component {
         underlayColor='#ddd'>
 
         <View style={styles.cell}>
-          <View style={[styles.avatarView, cellStyle]}>
-            <Text style={styles.cellText}>{rowData.name}</Text>
+          <Button
+            style={styles.roleButton}
+            onPress={()=> this.pressEvil(rowData, rowID)}
+            title="👎"
+            color="#841584"
+            accessibilityLabel="Make the player evil button"
+          />
+          <View style={styles.container}>
+            <View style={[styles.avatarView, cellStyle]}>
+              <Text style={styles.cellText}>{rowData.name}</Text>
+            </View>
+            <Text style={styles.detailsText}>{rowData.role}</Text>
           </View>
 
           <Button
             style={styles.roleButton}
             onPress={()=> this.pressGood(rowData, rowID)}
-            title="Good"
+            title="👍"
             color="#841584"
             accessibilityLabel="Make the player good button"
           />
-          <Button
-            style={styles.roleButton}
-            onPress={()=> this.pressEvil(rowData, rowID)}
-            title="Evil"
-            color="#841584"
-            accessibilityLabel="Make the player evil button"
-          />
-
         </View>
       </TouchableHighlight>
     );
@@ -168,8 +170,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    alignItems: 'center'
   },
   avatarView: {
     width: 40,
@@ -181,13 +182,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   roleButton: {
-    
+
   },
   cell: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 10,
+    padding: 5,
     alignItems: 'center',
     borderColor: '#D7D7D7',
     borderBottomWidth: 1
@@ -208,8 +209,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#000'
   },
   cellText: {
-    fontSize: 20,
-    textAlign: 'center'
+    fontSize: 30,
+    textAlign: 'center',
+    color: '#fff'
+  },
+  detailsText: {
+    fontSize: 10,
+    color: '#bbb'
   }
 });
 

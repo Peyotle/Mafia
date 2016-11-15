@@ -32,6 +32,16 @@ class GroupSizeSelector extends Component {
   render() {
     return(
       <View style={styles.container}>
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.logo}
+            source={require('image!Mafia1')}
+          />
+          <Text style={styles.title}>
+            Select the number of players
+          </Text>
+        </View>
+
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this.renderRow.bind(this)}
@@ -69,6 +79,19 @@ class GroupSizeSelector extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  imageContainer: {
+    flex: 1,
+    alignItems:'center'
+  },
+  logo: {
+    width: 100,
+    height: 150,
+    margin: 20,
+    marginTop: 80
+  },
+  title: {
+    fontSize: 20
   },
   cell: {
     flex: 1,
