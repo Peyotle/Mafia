@@ -5,7 +5,7 @@ import {
   Text,
   View,
   StyleSheet,
-  NavigatorIOS,
+  NavigatorIOS
 } from 'react-native';
 
 var GroupSizeSelector = require('./GroupSizeSelector');
@@ -27,9 +27,7 @@ class AppContainer extends Component {
         }}
         initialRoute={{
           component: GroupSizeSelector,
-          title: 'Group Size',
-          rightButtonTitle: 'Add',
-          onRightButtonPress: () => this._handleNavigationRequest(),
+          title: 'Group Size'
         }}
       />
     );

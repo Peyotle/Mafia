@@ -12,10 +12,11 @@ import {
   StyleSheet
 } from 'react-native';
 
-var Player = require('./Player.js');
+
+var Player = require('../Player.js');
 const roles = ['good', 'evil', 'evilMain', 'goodMain'];
 
-class RoleSelection extends Component {
+class RoleSelectionScreen extends Component {
   constructor(props) {
     super(props);
 
@@ -219,4 +220,4 @@ const styles = StyleSheet.create({
   }
 });
 
-module.exports = RoleSelection;
+module.exports = RoleSelectionScreen;

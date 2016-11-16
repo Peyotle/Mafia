@@ -12,7 +12,10 @@ import {
   StyleSheet
 } from 'react-native';
 
-var RoleSelection = require('./RoleSelection.js');
+// var RoleSelectionScreen = require('./RoleSelectionScreen.js');
+// import {registerScreens} from ".";
+// registerScreens();
+
 
 class GroupSizeSelector extends Component {
   constructor(props) {
@@ -33,10 +36,7 @@ class GroupSizeSelector extends Component {
     return(
       <View style={styles.container}>
         <View style={styles.imageContainer}>
-          <Image
-            style={styles.logo}
-            source={require('image!Mafia1')}
-          />
+
           <Text style={styles.title}>
             Select the number of players
           </Text>
@@ -66,8 +66,8 @@ class GroupSizeSelector extends Component {
 
   pressRow(rowData) {
     this.props.navigator.push({
+      screen: 'mafia.RoleSelectionScreen',
       title: 'Roles',
-      component: RoleSelection,
       passProps: {
         pushEvent: rowData
       }
