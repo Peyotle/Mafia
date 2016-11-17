@@ -53,6 +53,7 @@ class GameplayScreen extends Component {
   }
 
   onInfoButton() {
+    console.log(this.state.showInfo);
     this.state.showInfo = !this.state.showInfo;
   }
 
@@ -92,8 +93,17 @@ class GameplayScreen extends Component {
   }
 
   renderRow(rowData, sectionID, rowID) {
+    console.log(this.state.showInfo);
     var cellStyle = this.cellStyle(rowData.role);
+    if (this.state.showInfo) {
+      return this.detailedCell(rowData, cellStyle);
+    } else {
+      return this.minimalCell(rowData, cellStyle);
+    }
 
+  }
+
+  detailedCell(rowData, cellStyle) {
     return (
       <View style={styles.cell}>
         <View style={styles.container}>
@@ -113,6 +123,29 @@ class GameplayScreen extends Component {
       </View>
     );
   }
+
+  minimalCell(rowData) {
+    return (
+      <View style={styles.cell}>
+        <View style={styles.container}>
+          <View style={styles.avatarView}>
+            <Text style={styles.cellText}>{rowData.name}</Text>
+          </View>
+          <Text style={styles.detailsText}>{rowData.role}</Text>
+        </View>
+
+        <Button
+          style={styles.roleButton}
+          onPress={()=> this.pressKill(rowData, rowID)}
+          title="Kill"
+          color="#841584"
+          accessibilityLabel="Kill the player"
+        />
+      </View>
+    );
+  }
+
+
 
   pressKill(rowData, rowID) {
     var player: Player = rowData;
