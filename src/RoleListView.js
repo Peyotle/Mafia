@@ -12,6 +12,7 @@ import {
 
 const roles = ['good', 'evil', 'evilMain', 'goodMain'];
 var Player = require('./Player.js');
+var PlayerView = require('./PlayerView');
 
 class RoleListView extends Component {
   constructor(props) {
@@ -62,23 +63,19 @@ class RoleListView extends Component {
         underlayColor='#ddd'>
 
         <View style={styles.cell}>
+          <PlayerView name={rowData.name} role={rowData.role} cellStyle={cellStyle} />
+
           <Button
             style={styles.roleButton}
-            onPress={()=> this.pressEvil(rowData, rowID)}
+            onPress={()=> this.onPressRoleButton('evil', rowData, rowID)}
             title="👎"
             color="#841584"
             accessibilityLabel="Make the player evil button"
           />
-          <View style={styles.container}>
-            <View style={[styles.avatarView, cellStyle]}>
-              <Text style={styles.cellText}>{rowData.name}</Text>
-            </View>
-            <Text style={styles.detailsText}>{rowData.role}</Text>
-          </View>
 
           <Button
             style={styles.roleButton}
-            onPress={()=> this.pressGood(rowData, rowID)}
+            onPress={()=> this.onPressRoleButton('good', rowData, rowID)}
             title="👍"
             color="#841584"
             accessibilityLabel="Make the player good button"
@@ -88,36 +85,24 @@ class RoleListView extends Component {
     );
   }
 
-  pressGood(rowData, rowID) {
+  onPressRoleButton(buttonID, rowData, rowID) {
     var player: Player = rowData;
     var role = player.role;
 
-    role = (role == 'good') ? 'goodMain' : 'good';
+    if (buttonID == 'good'){
+      role = (role == 'good') ? 'goodMain' : 'good';
+    }else{
+      role = (role == 'evil') ? 'evilMain' : 'evil';
+    }
+
     var updatedPlayer = new Player(player.name, role);
-
     var newDs = this.state.players.slice();
-
     newDs[rowID] = updatedPlayer;
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(newDs),
       players: newDs
     });
-  }
-
-  pressEvil(rowData, rowID) {
-    var player: Player = rowData;
-    var role = player.role;
-
-    role = (role == 'evil') ? 'evilMain' : 'evil';
-    var updatedPlayer = new Player(player.name, role);
-
-    var newDs = this.state.players.slice();
-
-    newDs[rowID] = updatedPlayer;
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(newDs),
-      players: newDs
-    });
+    this.props.setPlayers(newDs)
   }
 
   pressRow(rowData, rowID) {
@@ -148,17 +133,9 @@ class RoleListView extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
     alignItems: 'center'
-  },
-  avatarView: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    borderColor: '#D7D7D7',
-    borderWidth: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
   },
   cell: {
     flex: 1,
@@ -184,17 +161,8 @@ const styles = StyleSheet.create({
   evilMainCell: {
     backgroundColor: '#000'
   },
-  cellText: {
-    fontSize: 30,
-    textAlign: 'center',
-    color: '#fff'
-  },
-  detailsText: {
-    fontSize: 10,
-    color: '#bbb'
-  },
   roleButton: {
-
+    margin: 20
   }
 });
 

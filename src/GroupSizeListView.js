@@ -27,13 +27,21 @@ class GroupSizeListView extends Component {
   render() {
     return(
       <ListView
+        style={{backgroundColor: '#555'}}
         dataSource={this.state.dataSource}
-        renderRow={this.renderRow.bind(this)}
+        renderRow={(rowData) =>
+          <GroupSizeRow
+          rowData={rowData}
+          pressRow={this.props.pressRow}
+        />}
       />
     );
   }
+}
 
-  renderRow(rowData) {
+class GroupSizeRow extends Component {
+  render() {
+    var rowData = this.props.rowData;
     return (
       <TouchableHighlight
         onPress={()=> this.props.pressRow(rowData)}

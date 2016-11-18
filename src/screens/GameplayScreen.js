@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 
 var Player = require('../Player.js');
+var PlayerView = require('../PlayerView');
 
 class GameplayScreen extends Component {
 
@@ -55,6 +56,24 @@ class GameplayScreen extends Component {
   onInfoButton() {
     console.log(this.state.showInfo);
     this.state.showInfo = !this.state.showInfo;
+    this.updateCellsDisplay();
+  }
+
+  updateCellsDisplay() {
+    var newPlayers = [];
+    var updatedPlayer;
+    var newDs = this.state.players.slice();
+
+    for (var player of this.state.players) {
+      updatedPlayer = new Player(player.name, player.role);
+      var rowID = this.state.players.indexOf(player);
+      newDs[rowID] = updatedPlayer;
+    }
+
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(newDs),
+      players: newDs
+    });
   }
 
   componentDidMount(){
@@ -95,65 +114,20 @@ class GameplayScreen extends Component {
   renderRow(rowData, sectionID, rowID) {
     console.log(this.state.showInfo);
     var cellStyle = this.cellStyle(rowData.role);
-    if (this.state.showInfo) {
-      return this.detailedCell(rowData, cellStyle);
-    } else {
-      return this.minimalCell(rowData, cellStyle);
-    }
-
+    return(
+      <PlayerGameplayCell rowData={rowData} rowID={rowID} cellStyle={cellStyle} onKill={this.pressKill.bind(this)} />
+    )
+    // if (this.state.showInfo) {
+    //   return this.detailedCell(rowData, cellStyle);
+    // } else {
+    //   return this.minimalCell(rowData, cellStyle);
+    // }
   }
-
-  detailedCell(rowData, cellStyle) {
-    return (
-      <View style={styles.cell}>
-        <View style={styles.container}>
-          <View style={[styles.avatarView, cellStyle]}>
-            <Text style={styles.cellText}>{rowData.name}</Text>
-          </View>
-          <Text style={styles.detailsText}>{rowData.role}</Text>
-        </View>
-
-        <Button
-          style={styles.roleButton}
-          onPress={()=> this.pressKill(rowData, rowID)}
-          title="Kill"
-          color="#841584"
-          accessibilityLabel="Kill the player"
-        />
-      </View>
-    );
-  }
-
-  minimalCell(rowData) {
-    return (
-      <View style={styles.cell}>
-        <View style={styles.container}>
-          <View style={styles.avatarView}>
-            <Text style={styles.cellText}>{rowData.name}</Text>
-          </View>
-          <Text style={styles.detailsText}>{rowData.role}</Text>
-        </View>
-
-        <Button
-          style={styles.roleButton}
-          onPress={()=> this.pressKill(rowData, rowID)}
-          title="Kill"
-          color="#841584"
-          accessibilityLabel="Kill the player"
-        />
-      </View>
-    );
-  }
-
-
 
   pressKill(rowData, rowID) {
     var player: Player = rowData;
-    var role = player.role;
 
-    role = (role == 'good') ? 'goodMain' : 'good';
-    var updatedPlayer = new Player(player.name, role);
-
+    var updatedPlayer = new Player(player.name, player.role, !player.isAlive);
     var newDs = this.state.players.slice();
 
     newDs[rowID] = updatedPlayer;
@@ -161,6 +135,33 @@ class GameplayScreen extends Component {
       dataSource: this.state.dataSource.cloneWithRows(newDs),
       players: newDs
     });
+  }
+}
+
+class PlayerGameplayCell extends Component {
+  render() {
+    var buttonTitle;
+    var cellStyle;
+    if (this.props.rowData.isAlive) {
+      buttonTitle = 'Kill';
+      cellStyle = styles.cellAlive;
+    } else {
+      buttonTitle = 'Revive';
+      cellStyle = styles.cellDead;
+    }
+    return (
+      <View style={[styles.cell, cellStyle]}>
+      <PlayerView name={this.props.rowData.name} role={this.props.rowData.role} cellStyle={this.props.cellStyle} />
+
+        <Button
+          style={styles.roleButton}
+          onPress={()=> this.props.onKill(this.props.rowData, this.props.rowID)}
+          title={buttonTitle}
+          color="#841584"
+          accessibilityLabel="Kill the player"
+        />
+      </View>
+    )
   }
 }
 
@@ -205,6 +206,12 @@ const styles = StyleSheet.create({
   },
   evilMainCell: {
     backgroundColor: '#000'
+  },
+  cellAlive: {
+    backgroundColor: '#fff'
+  },
+  cellDead: {
+    backgroundColor: '#ddd'
   },
   cellText: {
     fontSize: 30,

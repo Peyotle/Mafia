@@ -23,11 +23,6 @@ class GroupSizeSelector extends Component {
   render() {
     return(
       <View style={styles.container}>
-        <View style={styles.imageContainer}>
-          <Text style={styles.title}>
-            Select the number of players
-          </Text>
-        </View>
         <GroupSizeListView
           pressRow={this.pressRow.bind(this)}
         />
@@ -53,7 +48,8 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     flex: 1,
-    alignItems:'center'
+    alignItems:'center',
+    marginTop: 80
   },
   title: {
     fontSize: 20

@@ -10,7 +10,7 @@ registerScreens();
 Navigation.startSingleScreenApp({
  screen: {
    screen: 'mafia.GroupSizeSelector',
-   title: 'Navigation',
+   title: 'Group Size',
    navigatorStyle: {
      drawUnderNavBar: true,
      navBarTranslucent: true

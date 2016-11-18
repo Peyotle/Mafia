@@ -2,9 +2,10 @@
 
 class Player {
 
-  constructor(name, role) {
+  constructor(name, role, isAlive=true) {
     this.name = name;
     this.role = role;
+    this.isAlive = isAlive;
   }
 }
 

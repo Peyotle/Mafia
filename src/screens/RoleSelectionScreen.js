@@ -68,6 +68,7 @@ class RoleSelectionScreen extends Component {
     if (!allRolesAssigned){
       AlertIOS.alert('Missing roles', 'Please assign roles to all players');
     } else {
+      console.log(this.state.players);
       this.props.navigator.push({
         screen: 'mafia.GameplayScreen',
         title: 'Gameplay',
@@ -83,8 +84,15 @@ class RoleSelectionScreen extends Component {
       <RoleListView
         dataSource={this.state.dataSource}
         players={this.state.players}
+        setPlayers={this.setPlayers.bind(this)}
       />
     );
+  }
+
+  setPlayers(players) {
+    this.setState ({
+      players: players
+    })
   }
 }
 
