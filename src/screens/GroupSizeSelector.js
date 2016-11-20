@@ -4,38 +4,50 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  ActivityIndicator,
-  ListView,
-  Image,
   Button,
-  TouchableHighlight,
-  StyleSheet
+  StyleSheet,
+  Picker
 } from 'react-native';
-
-var GroupSizeListView = require('../GroupSizeListView');
 
 class GroupSizeSelector extends Component {
   constructor(props) {
     super(props);
 
+    this.state={
+      players: 10
+    }
   }
 
   render() {
     return(
       <View style={styles.container}>
-        <GroupSizeListView
-          pressRow={this.pressRow.bind(this)}
-        />
+        <Picker
+          style={styles.picker}
+          itemStyle={styles.pickerItem}
+          selectedValue={this.state.players}
+          onValueChange={(players) => this.setState({players: players})}>
+          <Picker.Item label="7" value={7} />
+          <Picker.Item label="8" value={8} />
+          <Picker.Item label="9" value={9} />
+          <Picker.Item label="10" value={10} />
+          <Picker.Item label="11" value={11} />
+          <Picker.Item label="12" value={12} />
+      </Picker>
+      <Button
+        title="Next"
+        onPress={this.onNextButton.bind(this)}>
+
+      </Button>
       </View>
     );
   }
 
-  pressRow(rowData) {
+  onNextButton() {
     this.props.navigator.push({
       screen: 'mafia.RoleSelectionScreen',
       title: 'Roles',
       passProps: {
-        pushEvent: rowData
+        pushEvent: this.state.players
       }
     });
   }
@@ -43,13 +55,16 @@ class GroupSizeSelector extends Component {
 }
 
 const styles = StyleSheet.create({
+  picker: {
+    transform: [{scale: 1.5}]
+  },
+  pickerItem: {
+     fontSize: 20,
+     height: 500,
+     margin: 10
+  },
   container: {
     flex: 1
-  },
-  imageContainer: {
-    flex: 1,
-    alignItems:'center',
-    marginTop: 80
   },
   title: {
     fontSize: 20
