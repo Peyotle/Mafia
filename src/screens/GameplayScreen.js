@@ -90,32 +90,11 @@ class GameplayScreen extends Component {
     );
   }
 
-  cellStyle(role: String) {
-    switch (role) {
-      case 'none':
-        break;
-      case 'good':
-      return styles.goodCell;
-        break;
-      case 'evil':
-      return styles.evilCell;
-        break;
-      case 'evilMain':
-      return styles.evilMainCell;
-        break;
-      case 'goodMain':
-      return styles.goodMainCell;
-        break;
-      default:
-      return styles.neutralCell;
-    }
-  }
-
   renderRow(rowData, sectionID, rowID) {
     console.log(this.state.showInfo);
-    var cellStyle = this.cellStyle(rowData.role);
+    // var cellStyle = this.cellStyle(rowData.role);
     return(
-      <PlayerGameplayCell rowData={rowData} rowID={rowID} cellStyle={cellStyle} onKill={this.pressKill.bind(this)} />
+      <PlayerGameplayCell rowData={rowData} rowID={rowID} onKill={this.pressKill.bind(this)} />
     )
     // if (this.state.showInfo) {
     //   return this.detailedCell(rowData, cellStyle);
@@ -140,28 +119,62 @@ class GameplayScreen extends Component {
 
 class PlayerGameplayCell extends Component {
   render() {
-    var buttonTitle;
-    var cellStyle;
-    if (this.props.rowData.isAlive) {
-      buttonTitle = 'Kill';
-      cellStyle = styles.cellAlive;
-    } else {
-      buttonTitle = 'Revive';
-      cellStyle = styles.cellDead;
-    }
+    var cellStyle = this.props.rowData.isAlive ? styles.cellAlive : styles.cellDead;
     return (
       <View style={[styles.cell, cellStyle]}>
-      <PlayerView name={this.props.rowData.name} role={this.props.rowData.role} cellStyle={this.props.cellStyle} />
+      <PlayerView name={this.props.rowData.name} role={this.props.rowData.role}/>
+      <KillButton
+        isAlive={this.props.rowData.isAlive}
+        style={styles.roleButton}
+        onPress={()=> this.props.onKill(this.props.rowData, this.props.rowID)}
 
-        <Button
-          style={styles.roleButton}
-          onPress={()=> this.props.onKill(this.props.rowData, this.props.rowID)}
-          title={buttonTitle}
-          color="#841584"
-          accessibilityLabel="Kill the player"
-        />
+      />
+
       </View>
-    )
+    );
+  }
+
+  cellStyle(role: String) {
+    switch (role) {
+      case 'none':
+        break;
+      case 'good':
+      return styles.goodCell;
+        break;
+      case 'evil':
+      return styles.evilCell;
+        break;
+      case 'evilMain':
+      return styles.evilMainCell;
+        break;
+      case 'goodMain':
+      return styles.goodMainCell;
+        break;
+      default:
+      return styles.neutralCell;
+    }
+  }
+}
+
+class KillButton extends Component {
+  render() {
+    var buttonTitle;
+    var accessibilityLabel;
+    if (this.props.isAlive) {
+      buttonTitle = 'Kill';
+      accessibilityLabel = 'Kill the player'
+    } else {
+      buttonTitle = 'Revive';
+      accessibilityLabel = 'Revive the player'
+    }
+    return(
+      <Button
+        onPress={()=> this.props.onPress(this.props.rowData, this.props.rowID)}
+        title={buttonTitle}
+        color="#841584"
+        accessibilityLabel={accessibilityLabel}
+      />
+    );
   }
 }
 

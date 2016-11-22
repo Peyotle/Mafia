@@ -64,8 +64,9 @@ class RoleSelectionScreen extends Component {
   }
 
   onNextButton() {
-    var allRolesAssigned = true;
-    if (!allRolesAssigned){
+    var noRolePlayers = this.state.players.filter(player => player.role == 'none').length;
+
+    if (noRolePlayers > 0){
       AlertIOS.alert('Missing roles', 'Please assign roles to all players');
     } else {
       console.log(this.state.players);
