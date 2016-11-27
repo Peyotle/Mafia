@@ -9,16 +9,26 @@ import {
   Picker
 } from 'react-native';
 
-class GroupSizeSelector extends Component {
+class GroupSizeScreen extends Component {
   constructor(props) {
     super(props);
 
     this.state={
-      players: 10
+      players: 4
     }
   }
 
   render() {
+    const minNumberOfPlayers = 4;
+    const maxNumberOfPlayers = 12;
+    var pickerItems = [];
+    for (var i = minNumberOfPlayers; i <= maxNumberOfPlayers; i++) {
+      pickerItems[i] = <Picker.Item
+        label={String(i)}
+        value={i}
+        key={String(i)}
+      />
+    }
     return(
       <View style={styles.container}>
         <Picker
@@ -26,17 +36,11 @@ class GroupSizeSelector extends Component {
           itemStyle={styles.pickerItem}
           selectedValue={this.state.players}
           onValueChange={(players) => this.setState({players: players})}>
-          <Picker.Item label="7" value={7} />
-          <Picker.Item label="8" value={8} />
-          <Picker.Item label="9" value={9} />
-          <Picker.Item label="10" value={10} />
-          <Picker.Item label="11" value={11} />
-          <Picker.Item label="12" value={12} />
+          {pickerItems}
       </Picker>
       <Button
         title="Next"
         onPress={this.onNextButton.bind(this)}>
-
       </Button>
       </View>
     );
@@ -51,7 +55,6 @@ class GroupSizeSelector extends Component {
       }
     });
   }
-
 }
 
 const styles = StyleSheet.create({
@@ -71,4 +74,4 @@ const styles = StyleSheet.create({
   }
 });
 
-module.exports = GroupSizeSelector;
+module.exports = GroupSizeScreen;

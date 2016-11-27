@@ -11,8 +11,8 @@ import {
 } from 'react-native';
 
 const roles = ['good', 'evil', 'evilMain', 'goodMain'];
-var Player = require('./Player.js');
-var PlayerView = require('./PlayerView');
+var Player = require('../Player');
+var PlayerView = require('../PlayerView');
 
 class RoleListView extends Component {
   constructor(props) {
