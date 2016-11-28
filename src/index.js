@@ -13,7 +13,11 @@ Navigation.startSingleScreenApp({
    title: 'Group Size',
    navigatorStyle: {
      drawUnderNavBar: true,
-     navBarTranslucent: true
+     navBarTranslucent: true,
+     navBarTextColor: '#fff',
+    //  navBarBackgroundColor: '#000',
+     navBarButtonColor: '#f00',
+     statusBarTextColorScheme: 'light'
    }
  }
 });

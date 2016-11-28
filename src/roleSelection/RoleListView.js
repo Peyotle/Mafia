@@ -13,6 +13,7 @@ import {
 const roles = ['good', 'evil', 'evilMain', 'goodMain'];
 var Player = require('../Player');
 var PlayerView = require('../PlayerView');
+var globalStyles = require('../styles');
 
 class RoleListView extends Component {
   constructor(props) {
@@ -26,9 +27,11 @@ class RoleListView extends Component {
   render() {
     return(
       <ListView
-        style = {styles.listView}
+        automaticallyAdjustContentInsets={true}
+        style = {[styles.listView, globalStyles.mainBackground]}
         dataSource={this.state.dataSource}
         renderRow={this.renderRow.bind(this)}
+        scrollRenderAheadDistance={60}
       />
     );
   }
@@ -139,6 +142,7 @@ const styles = StyleSheet.create({
   },
   cell: {
     flex: 1,
+    backgroundColor: 'transparent',
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 5,

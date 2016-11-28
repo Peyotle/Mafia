@@ -12,8 +12,15 @@ import {
 
 var Player = require('../Player.js');
 var RoleListView = require('./RoleListView');
+var globalStyles = require('../styles');
 
 class RoleSelectionScreen extends Component {
+
+  static navigatorStyle = {
+    drawUnderNavBar: true,
+    navBarTranslucent: true
+  };
+
   static navigatorButtons = {
     rightButtons: [
       {
@@ -73,11 +80,15 @@ class RoleSelectionScreen extends Component {
 
   render() {
     return(
+      <View
+        style={[styles.container, {marginTop: 60}, globalStyles.mainBackground]}>
       <RoleListView
+
         dataSource={this.state.dataSource}
         players={this.state.players}
         setPlayers={this.setPlayers.bind(this)}
       />
+      </View>
     );
   }
 
@@ -89,7 +100,9 @@ class RoleSelectionScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-
+  container: {
+    flex: 1
+  }
 });
 
 module.exports = RoleSelectionScreen;

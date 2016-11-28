@@ -5,7 +5,8 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  StyleSheet
+  StyleSheet,
+  Image
 } from 'react-native';
 
 class PlayerView extends Component {
@@ -14,8 +15,14 @@ class PlayerView extends Component {
     return (
       <View style={styles.container}>
         <View style={[styles.avatarView, roleStyle]}>
-          <Text style={styles.cellText}>{this.props.name}</Text>
+        <Image
+        source={{ uri: "Mafia_circle", isStatic: true }}
+        style={[styles.avatarView, roleStyle]}
+        />
+
+
         </View>
+        <Text style={styles.cellText}>{this.props.name}</Text>
         <Text style={styles.detailsText}>{this.props.role}</Text>
       </View>
     );
@@ -53,9 +60,9 @@ const styles = StyleSheet.create({
   avatarView: {
     width: 40,
     height: 40,
-    borderRadius: 20,
-    borderColor: '#D7D7D7',
-    borderWidth: 1,
+    // borderRadius: 20,
+    // borderColor: '#D7D7D7',
+    // borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 10
@@ -77,8 +84,9 @@ const styles = StyleSheet.create({
   },
   cellText: {
     fontSize: 30,
+    marginLeft: 20,
     textAlign: 'center',
-    color: '#fff'
+    color: '#ddd'
   },
   detailsText: {
     fontSize: 10,

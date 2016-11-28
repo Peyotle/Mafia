@@ -6,8 +6,11 @@ import {
   View,
   Button,
   StyleSheet,
-  Picker
+  Picker,
+  StatusBar
 } from 'react-native';
+
+var globalStyles = require('../styles');
 
 class GroupSizeScreen extends Component {
   constructor(props) {
@@ -30,7 +33,8 @@ class GroupSizeScreen extends Component {
       />
     }
     return(
-      <View style={styles.container}>
+      <View style={[globalStyles.container, globalStyles.mainBackground]}>
+      <StatusBar barStyle="light-content" />
         <Picker
           style={styles.picker}
           itemStyle={styles.pickerItem}
@@ -64,10 +68,12 @@ const styles = StyleSheet.create({
   pickerItem: {
      fontSize: 20,
      height: 500,
-     margin: 10
+     margin: 10,
+     color: '#fff'
   },
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#001'
   },
   title: {
     fontSize: 20
