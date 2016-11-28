@@ -27,11 +27,11 @@ class RoleListView extends Component {
   render() {
     return(
       <ListView
-        automaticallyAdjustContentInsets={true}
         style = {[styles.listView, globalStyles.mainBackground]}
         dataSource={this.state.dataSource}
         renderRow={this.renderRow.bind(this)}
         scrollRenderAheadDistance={60}
+        style={{marginTop: 60, overflow: 'visible'}}
       />
     );
   }

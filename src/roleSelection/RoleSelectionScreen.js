@@ -81,13 +81,12 @@ class RoleSelectionScreen extends Component {
   render() {
     return(
       <View
-        style={[styles.container, {marginTop: 60}, globalStyles.mainBackground]}>
-      <RoleListView
-
-        dataSource={this.state.dataSource}
-        players={this.state.players}
-        setPlayers={this.setPlayers.bind(this)}
-      />
+        style={[styles.container, globalStyles.mainBackground]}>
+          <RoleListView
+            dataSource={this.state.dataSource}
+            players={this.state.players}
+            setPlayers={this.setPlayers.bind(this)}
+          />
       </View>
     );
   }
