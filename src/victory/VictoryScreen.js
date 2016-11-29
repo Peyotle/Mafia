@@ -14,9 +14,15 @@ class VictoryScreen extends Component {
   }
 
   render() {
+    var winner = 'Mafia'
+    var innocentsKilled = 0;
+    var evilKilled = 0;
     return(
       <View style={styles.container}>
-        <Text>Hello</Text>
+        <Text style={styles.title}>{winner} won!</Text>
+        <Text style={styles.stats}>Mafia killed: {evilKilled}</Text>
+        <Text style={styles.stats}>Innocents killed: {innocentsKilled}</Text>
+
         <Button
           title='Restart'
           onPress={() => this.restartGame()}
@@ -43,11 +49,19 @@ class VictoryScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 60,
     justifyContent: 'flex-start',
     alignItems: 'center'
   },
   title: {
-    fontSize: 20
+    color: '#fff',
+    fontSize: 30,
+    margin: 20
+  },
+  stats: {
+    color: '#fff',
+    fontSize: 20,
+    margin: 10
   }
 });
 

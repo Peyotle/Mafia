@@ -7,7 +7,7 @@ import {
   ListView,
   TouchableHighlight,
   StyleSheet,
-  Button
+  Image
 } from 'react-native';
 
 var PlayerView = require('../PlayerView');
@@ -27,25 +27,25 @@ class PlayerGameplayCell extends Component {
   }
 }
 
-
 class KillButton extends Component {
   render() {
-    var buttonTitle;
+    var buttonImage;
     var accessibilityLabel;
     if (this.props.isAlive) {
-      buttonTitle = 'Kill';
+
+      buttonImage = 'Skull_circle';
       accessibilityLabel = 'Kill the player'
     } else {
-      buttonTitle = 'Revive';
+      buttonImage = 'Refresh_circle';
       accessibilityLabel = 'Revive the player'
     }
     return(
-      <Button
-        onPress={()=> this.props.onPress(this.props.rowData, this.props.rowID)}
-        title={buttonTitle}
-        color="#841584"
-        accessibilityLabel={accessibilityLabel}
-      />
+      <TouchableHighlight onPress={()=> this.props.onPress(this.props.rowData, this.props.rowID)}>
+        <Image
+          style={styles.button}
+          source={{ uri: buttonImage, isStatic: true }}
+        />
+      </TouchableHighlight>
     );
   }
 }
@@ -75,15 +75,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 5,
     alignItems: 'center',
-    borderColor: '#D7D7D7',
-    borderBottomWidth: 1
+    backgroundColor: 'transparent'
   },
   cellAlive: {
-    backgroundColor: '#fff'
+    backgroundColor: '#001'
   },
   cellDead: {
-    backgroundColor: '#ddd'
+    backgroundColor: '#200'
   },
+  button: {
+    width: 40,
+    height: 40
+  }
 
 });
 

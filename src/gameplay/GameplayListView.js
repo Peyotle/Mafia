@@ -11,8 +11,8 @@ import {
 } from 'react-native';
 
 var Player = require('../Player.js');
-
 var PlayerGameplayCell  = require('./PlayerGameplayCell');
+var globalStyles = require('../styles');
 
 class GameplayListView extends Component {
 
@@ -30,8 +30,10 @@ class GameplayListView extends Component {
   render() {
     return(
       <ListView
+        style = {globalStyles.mainBackground}
         dataSource={this.state.dataSource}
         renderRow={this.renderRow.bind(this)}
+        renderSeparator={this.renderSeparator}
       />
     );
   }
@@ -45,6 +47,12 @@ class GameplayListView extends Component {
     );
   }
 
+  renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
+    return(
+      <View key={`${sectionID}-${rowID}`} style={styles.separator}></View>
+    );
+  }
+
   pressKill(rowData, rowID) {
     var player: Player = rowData;
 
@@ -55,8 +63,6 @@ class GameplayListView extends Component {
     this.setState({
       dataSource: this.state.dataSource.cloneWithRows(newDatasource),
     });
-    console.log("List players: " + newDatasource);
-    // var onKill = ;
     this.props.updatePlayers(newDatasource, this.props.onKill);
   }
 }
@@ -76,7 +82,12 @@ const styles = StyleSheet.create({
   detailsText: {
     fontSize: 10,
     color: '#bbb'
-  }
+  },
+  separator: {
+    height: 0.5,
+    backgroundColor: '#225',
+    marginLeft: 20
+  },
 });
 
 module.exports = GameplayListView;

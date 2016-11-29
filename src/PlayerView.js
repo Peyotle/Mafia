@@ -11,16 +11,14 @@ import {
 
 class PlayerView extends Component {
   render() {
-    var roleStyle = this.roleStyle(this.props.role);
+    var roleImage = this.roleImage(this.props.role);
     return (
       <View style={styles.container}>
-        <View style={[styles.avatarView, roleStyle]}>
-        <Image
-        source={{ uri: "Mafia_circle", isStatic: true }}
-        style={[styles.avatarView, roleStyle]}
-        />
-
-
+        <View style={styles.avatarView}>
+          <Image
+            source={{ uri: roleImage, isStatic: true }}
+            style={styles.avatarView}
+          />
         </View>
         <Text style={styles.cellText}>{this.props.name}</Text>
         <Text style={styles.detailsText}>{this.props.role}</Text>
@@ -28,24 +26,25 @@ class PlayerView extends Component {
     );
   }
 
-  roleStyle(role: String) {
+  roleImage(role: String) {
     switch (role) {
       case 'none':
+      return "None_big_ic";
         break;
       case 'good':
-      return styles.goodCell;
+      return "Innocent_big_ic";
         break;
       case 'evil':
-      return styles.evilCell;
+      return "Mafia_big_ic";
         break;
       case 'evilMain':
-      return styles.evilMainCell;
+      return "Don_big_ic";
         break;
       case 'goodMain':
-      return styles.goodMainCell;
+      return "Sheriff_big_ic";
         break;
       default:
-      return styles.neutralCell;
+      return "None_big_ic";
     }
   }
 }
@@ -60,27 +59,9 @@ const styles = StyleSheet.create({
   avatarView: {
     width: 40,
     height: 40,
-    // borderRadius: 20,
-    // borderColor: '#D7D7D7',
-    // borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 10
-  },
-  neutralCell: {
-    backgroundColor: '#ddd'
-  },
-  evilCell: {
-    backgroundColor: '#f00'
-  },
-  goodCell: {
-    backgroundColor: '#0f0'
-  },
-  goodMainCell: {
-    backgroundColor: '#00f'
-  },
-  evilMainCell: {
-    backgroundColor: '#000'
   },
   cellText: {
     fontSize: 30,

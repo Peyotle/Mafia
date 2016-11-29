@@ -33,7 +33,7 @@ class GroupSizeScreen extends Component {
       />
     }
     return(
-      <View style={[globalStyles.container, globalStyles.mainBackground]}>
+      <View style={globalStyles.container}>
       <StatusBar barStyle="light-content" />
         <Picker
           style={styles.picker}

@@ -15,9 +15,9 @@ Navigation.startSingleScreenApp({
      drawUnderNavBar: true,
      navBarTranslucent: true,
      navBarTextColor: '#fff',
-    //  navBarBackgroundColor: '#000',
      navBarButtonColor: '#f00',
-     statusBarTextColorScheme: 'light'
+     statusBarTextColorScheme: 'light',
+     screenBackgroundColor: '#001'
    }
  }
 });

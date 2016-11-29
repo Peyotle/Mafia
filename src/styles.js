@@ -9,6 +9,6 @@ module.exports = StyleSheet.create({
   },
 
   mainBackground: {
-    backgroundColor: '#001'
+    backgroundColor: 'transparent'
   }
 });
