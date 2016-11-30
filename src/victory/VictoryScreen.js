@@ -8,21 +8,31 @@ import {
   StyleSheet
 } from 'react-native';
 
+var PlayersHelper = require('../PlayersHelper.js');
+
 class VictoryScreen extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    var winner = 'Mafia'
-    var innocentsKilled = 0;
-    var evilKilled = 0;
+    var winner = this.props.winner;
+
+    var evilPlayers = PlayersHelper.evilPlayers(this.props.players);
+    var numberOfEvilAlive = PlayersHelper.alivePlayers(evilPlayers).length;
+
+    var innocentPlayers = PlayersHelper.innocentPlayers(this.props.players);
+    var numberOfInnocentsAlive = PlayersHelper.alivePlayers(innocentPlayers).length;
+
+    var innocentsKilled = innocentPlayers.length - numberOfInnocentsAlive;
+    var evilKilled = evilPlayers.length - numberOfEvilAlive;
+
+
     return(
       <View style={styles.container}>
         <Text style={styles.title}>{winner} won!</Text>
         <Text style={styles.stats}>Mafia killed: {evilKilled}</Text>
         <Text style={styles.stats}>Innocents killed: {innocentsKilled}</Text>
-
         <Button
           title='Restart'
           onPress={() => this.restartGame()}

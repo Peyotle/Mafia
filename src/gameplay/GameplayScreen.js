@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 var GameplayListView = require('./GameplayListView.js');
+var PlayersHelper = require('../PlayersHelper.js');
 
 class GameplayScreen extends Component {
   static navigatorButtons = {
@@ -58,11 +59,11 @@ class GameplayScreen extends Component {
   }
 
   checkGameResult() {
-    var evilPlayers = this.evilPlayers();
-    var numberOfEvilAlive = this.alivePlayers(evilPlayers).length;
+    var evilPlayers = PlayersHelper.evilPlayers(this.state.players);
+    var numberOfEvilAlive = PlayersHelper.alivePlayers(evilPlayers).length;
 
-    var innocentPlayers = this.innocentPlayers();
-    var numberOfInnocentsAlive = this.alivePlayers(innocentPlayers).length;
+    var innocentPlayers = PlayersHelper.innocentPlayers(this.state.players);
+    var numberOfInnocentsAlive = PlayersHelper.alivePlayers(innocentPlayers).length;
 
     if(numberOfEvilAlive == 0) {
       this.finishGame('Innocents');
@@ -72,34 +73,23 @@ class GameplayScreen extends Component {
     }
   }
 
-  innocentPlayers() {
-    return this.state.players.filter(player => player.role == 'good' || player.role == 'goodMain');
-  }
-
-  evilPlayers(){
-    return this.state.players.filter(player => player.role == 'evil' || player.role == 'evilMain');
-  }
-
-  alivePlayers(players) {
-    return players.filter(player => player.isAlive == true);
-  }
-
   finishGame(winner){
     const buttons = [ {text: 'Cancel',
                       onPress: () => console.log('Cancel Pressed'),
                       style: 'cancel'},
                       {text: 'Finish',
-                      onPress: () => this.goToVictoryScreen()}, ];
+                      onPress: () => this.goToVictoryScreen(winner)}, ];
     const alertTitle = winner + ' win';
     AlertIOS.alert(alertTitle, null, buttons);
   }
 
-  goToVictoryScreen() {
+  goToVictoryScreen(winner) {
     this.props.navigator.push({
       screen: 'mafia.VictoryScreen',
       title: 'Victory',
       passProps: {
-        pushEvent: this.state.players
+        players: this.state.players,
+        winner: winner
       }
     });
   }
