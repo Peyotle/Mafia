@@ -5,9 +5,7 @@ import {
   Text,
   View,
   ListView,
-  TouchableHighlight,
-  StyleSheet,
-  Button
+  StyleSheet
 } from 'react-native';
 
 var Player = require('../Player.js');

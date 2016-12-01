@@ -7,7 +7,9 @@ import {
   Button,
   StyleSheet,
   Picker,
-  StatusBar
+  StatusBar,
+  TouchableHighlight,
+  Image
 } from 'react-native';
 
 var globalStyles = require('../styles');
@@ -33,19 +35,33 @@ class GroupSizeScreen extends Component {
       />
     }
     return(
-      <View style={globalStyles.container}>
-      <StatusBar barStyle="light-content" />
+      <View style={styles.container}>
+        <StatusBar barStyle="light-content" />
+        <View style={styles.titleContainer}>
+          <Image
+            style={{width: 50, height: 50, margin: 10}}
+            source={{ uri: "Mafia_circle", isStatic: true }}
+          />
+          <Text style={styles.title}>
+            Select the number of players
+          </Text>
+        </View>
+
         <Picker
-          style={styles.picker}
-          itemStyle={styles.pickerItem}
-          selectedValue={this.state.players}
-          onValueChange={(players) => this.setState({players: players})}>
-          {pickerItems}
-      </Picker>
-      <Button
-        title="Next"
-        onPress={this.onNextButton.bind(this)}>
-      </Button>
+            style={styles.picker}
+            itemStyle={styles.pickerItem}
+            selectedValue={this.state.players}
+            onValueChange={(players) => this.setState({players: players})}>
+            {pickerItems}
+        </Picker>
+        <TouchableHighlight
+          onPress={this.onNextButton.bind(this)}>
+          <View style={styles.button}>
+          <Text style={styles.buttonText}>
+            Next
+          </Text>
+          </View>
+        </TouchableHighlight>
       </View>
     );
   }
@@ -63,20 +79,44 @@ class GroupSizeScreen extends Component {
 
 const styles = StyleSheet.create({
   picker: {
-    transform: [{scale: 1.5}]
+    transform: [{scale: 1.5}],
+    marginTop: 40
   },
   pickerItem: {
      fontSize: 20,
-     height: 500,
-     margin: 10,
+     height: 200,
+     margin: 20,
      color: '#fff'
   },
   container: {
     flex: 1,
-    backgroundColor: '#001'
+    backgroundColor: '#001',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    paddingTop: 80,
+  },
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 40,
+    height: 40,
+    backgroundColor: '#14bbcd',
+    borderRadius: 10,
+  },
+  buttonText: {
+    color: '#fff',
+    margin: 5
   },
   title: {
-    fontSize: 20
+    color: '#fff',
+    fontSize: 25,
+    textAlign: 'center'
+  },
+  titleContainer: {
+    flex: 1,
+    alignItems: 'center',
+    margin: 40,
+    justifyContent: 'center'
   }
 });
 
