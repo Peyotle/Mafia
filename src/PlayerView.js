@@ -11,7 +11,8 @@ import {
 
 class PlayerView extends Component {
   render() {
-    var roleImage = this.roleImage(this.props.role);
+    var roleImage = this.props.hideInfo ? "None_big_ic" : this.roleImage(this.props.role);
+    var roleName = this.props.hideInfo ? 'Hidden' : this.props.role;
     return (
       <View style={styles.container}>
         <View style={styles.avatarView}>
@@ -21,7 +22,7 @@ class PlayerView extends Component {
           />
         </View>
         <Text style={styles.cellText}>{this.props.name}</Text>
-        <Text style={styles.detailsText}>{this.props.role}</Text>
+        <Text style={styles.detailsText}>{roleName}</Text>
       </View>
     );
   }

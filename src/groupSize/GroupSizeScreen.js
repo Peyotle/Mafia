@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 
 var globalStyles = require('../styles');
+var FlatButton = require('../UIComponents/FlatButton');
 
 class GroupSizeScreen extends Component {
   constructor(props) {
@@ -54,14 +55,7 @@ class GroupSizeScreen extends Component {
             onValueChange={(players) => this.setState({players: players})}>
             {pickerItems}
         </Picker>
-        <TouchableHighlight
-          onPress={this.onNextButton.bind(this)}>
-          <View style={styles.button}>
-          <Text style={styles.buttonText}>
-            Next
-          </Text>
-          </View>
-        </TouchableHighlight>
+        <FlatButton title='Next' onPress={this.onNextButton.bind(this)} />
       </View>
     );
   }
@@ -94,18 +88,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
     paddingTop: 80,
-  },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 40,
-    height: 40,
-    backgroundColor: '#14bbcd',
-    borderRadius: 10,
-  },
-  buttonText: {
-    color: '#fff',
-    margin: 5
   },
   title: {
     color: '#fff',

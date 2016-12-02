@@ -11,12 +11,13 @@ import {
 } from 'react-native';
 
 var PlayerView = require('../PlayerView');
+
 class PlayerGameplayCell extends Component {
   render() {
     var cellStyle = this.props.rowData.isAlive ? styles.cellAlive : styles.cellDead;
     return (
       <View style={[styles.cell, cellStyle]}>
-        <PlayerView name={this.props.rowData.name} role={this.props.rowData.role}/>
+        <PlayerView name={this.props.rowData.name} role={this.props.rowData.role} hideInfo={this.props.hideInfo}/>
         <KillButton
           isAlive={this.props.rowData.isAlive}
           style={styles.roleButton}

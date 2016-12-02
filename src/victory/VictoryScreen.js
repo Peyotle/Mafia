@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 var PlayersHelper = require('../PlayersHelper.js');
+var FlatButton = require('../UIComponents/FlatButton');
 
 class VictoryScreen extends Component {
   constructor(props) {
@@ -33,10 +34,7 @@ class VictoryScreen extends Component {
         <Text style={styles.title}>{winner} won!</Text>
         <Text style={styles.stats}>Mafia killed: {evilKilled}</Text>
         <Text style={styles.stats}>Innocents killed: {innocentsKilled}</Text>
-        <Button
-          title='Restart'
-          onPress={() => this.restartGame()}
-        />
+        <FlatButton title='Restart' onPress={this.restartGame.bind(this)} />
       </View>
     );
   }

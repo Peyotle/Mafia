@@ -28,7 +28,7 @@ class GameplayScreen extends Component {
 
     this.state = {
       players: props.pushEvent,
-      showInfo: true
+      hideInfo: false
     };
 
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
@@ -43,10 +43,9 @@ class GameplayScreen extends Component {
   }
 
   onInfoButton() {
-    // console.log(this.state.showInfo);
-    // this.state.showInfo = !this.state.showInfo;
-    // this.updateCellsDisplay();
+    this.setState ({hideInfo: !this.state.hideInfo});
   }
+
 
   updatePlayers(players, completion) {
     this.setState ({
@@ -95,12 +94,24 @@ class GameplayScreen extends Component {
   }
 
   render() {
+    this.props.navigator.setButtons({
+      rightButtons: [
+        {
+          title: this.state.hideInfo ? 'Show Info' : 'Hide Info',
+          id: 'info',
+          disabled: false,
+          disableIconTint: true
+        }
+      ]
+    });
+
     return(
       <GameplayListView
         dataSource={this.state.dataSource}
         players={this.state.players}
         onKill={this.onKill.bind(this)}
         updatePlayers={this.updatePlayers.bind(this)}
+        hideInfo={this.state.hideInfo}
       />
     );
   }

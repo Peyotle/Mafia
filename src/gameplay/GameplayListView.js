@@ -32,6 +32,7 @@ class GameplayListView extends Component {
         dataSource={this.state.dataSource}
         renderRow={this.renderRow.bind(this)}
         renderSeparator={this.renderSeparator}
+        key={this.props.hideInfo}
       />
     );
   }
@@ -41,7 +42,8 @@ class GameplayListView extends Component {
         <PlayerGameplayCell
           rowData={rowData}
           rowID={rowID}
-          onKill={this.pressKill.bind(this)} />
+          onKill={this.pressKill.bind(this)}
+          hideInfo={this.props.hideInfo} />
     );
   }
 
@@ -63,6 +65,7 @@ class GameplayListView extends Component {
     });
     this.props.updatePlayers(newDatasource, this.props.onKill);
   }
+
 }
 
 
