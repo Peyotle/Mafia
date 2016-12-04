@@ -13,21 +13,13 @@ import {
 var Player = require('../Player.js');
 var RoleListView = require('./RoleListView');
 var globalStyles = require('../styles');
+var FlatButton = require('../UIComponents/FlatButton');
 
 class RoleSelectionScreen extends Component {
 
   static navigatorStyle = {
     drawUnderNavBar: true,
     navBarTranslucent: true
-  };
-
-  static navigatorButtons = {
-    rightButtons: [
-      {
-        title: 'Next',
-        id: 'next'
-      }
-    ]
   };
 
   constructor(props) {
@@ -87,6 +79,7 @@ class RoleSelectionScreen extends Component {
             players={this.state.players}
             setPlayers={this.setPlayers.bind(this)}
           />
+          <FlatButton title='Start Game' onPress={this.onNextButton.bind(this)} />
       </View>
     );
   }

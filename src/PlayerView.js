@@ -12,7 +12,7 @@ import {
 class PlayerView extends Component {
   render() {
     var roleImage = this.props.hideInfo ? "None_big_ic" : this.roleImage(this.props.role);
-    var roleName = this.props.hideInfo ? 'Hidden' : this.props.role;
+    var roleName = this.props.hideInfo ? 'Hidden' : this.roleName(this.props.role);
     return (
       <View style={styles.container}>
         <View style={styles.avatarView}>
@@ -43,6 +43,28 @@ class PlayerView extends Component {
         break;
       case 'goodMain':
       return "Sheriff_big_ic";
+        break;
+      default:
+      return "None_big_ic";
+    }
+  }
+
+  roleName(role: String) {
+    switch (role) {
+      case 'none':
+      return "None";
+        break;
+      case 'good':
+      return "Innocent";
+        break;
+      case 'evil':
+      return "Mafia";
+        break;
+      case 'evilMain':
+      return "Don";
+        break;
+      case 'goodMain':
+      return "Detective";
         break;
       default:
       return "None_big_ic";

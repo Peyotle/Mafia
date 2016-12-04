@@ -11,8 +11,7 @@
     "react": "~15.3.1",
     "react-native": "^0.37.0",
     "react-native-navigation": "^2.0.0-experimental.147",
-    "react-native-swipeout": "^2.0.12",
-    "redux": "^3.6.0"
+    "react-native-swipeout": "^2.0.12"
   },
   "devDependencies": {
     "babel-jest": "17.0.0",
