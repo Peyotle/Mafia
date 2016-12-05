@@ -4,11 +4,9 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  Button,
   StyleSheet,
   Picker,
   StatusBar,
-  TouchableHighlight,
   Image
 } from 'react-native';
 
@@ -55,7 +53,7 @@ class GroupSizeScreen extends Component {
             onValueChange={(players) => this.setState({players: players})}>
             {pickerItems}
         </Picker>
-        <FlatButton title='Next' onPress={this.onNextButton.bind(this)} />
+        <FlatButton title='Get Started' onPress={this.onNextButton.bind(this)} />
       </View>
     );
   }

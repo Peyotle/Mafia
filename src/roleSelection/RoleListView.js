@@ -14,6 +14,7 @@ const roles = ['good', 'evil', 'evilMain', 'goodMain'];
 var Player = require('../Player');
 var PlayerView = require('../PlayerView');
 var globalStyles = require('../styles');
+var RoleSelectionCell = require('./RoleSelectionCell');
 
 class RoleListView extends Component {
   constructor(props) {
@@ -39,28 +40,10 @@ class RoleListView extends Component {
 
   renderRow(rowData, sectionID, rowID) {
     return (
-      <View>
-        <View style={styles.cell}>
-          <PlayerView
-            name={rowData.name}
-            role={rowData.role}
-          />
-          <TouchableHighlight onPress={()=> this.onPressRoleButton('evil', rowData, rowID)}>
-            <Image
-              style={styles.button}
-              source={{ uri: "Mafia_circle", isStatic: true }}
-            />
-          </TouchableHighlight>
-
-          <TouchableHighlight onPress={()=> this.onPressRoleButton('good', rowData, rowID)}>
-            <Image
-              style={styles.button}
-              source={{ uri: "Innocent_circle", isStatic: true }}
-            />
-          </TouchableHighlight>
-
-        </View>
-      </View>
+      <RoleSelectionCell
+        player={rowData}
+        rowID={rowID}
+      onPressRoleButton={this.onPressRoleButton.bind(this)} />
     );
   }
 
@@ -106,27 +89,11 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center'
   },
-  cell: {
-    flex: 1,
-    backgroundColor: 'transparent',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 5,
-    alignItems: 'center'
-  },
   separator: {
     height: 0.5,
     backgroundColor: '#225',
     marginLeft: 20
   },
-  button: {
-    width: 40,
-    height: 40,
-    marginLeft: 20
-  },
-  roleButton: {
-    margin: 20
-  }
 });
 
 module.exports = RoleListView;

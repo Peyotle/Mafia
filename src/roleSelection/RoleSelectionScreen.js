@@ -73,7 +73,7 @@ class RoleSelectionScreen extends Component {
   render() {
     return(
       <View
-        style={[styles.container, globalStyles.mainBackground]}>
+        style={[{flex: 1}, globalStyles.mainBackground]}>
           <RoleListView
             dataSource={this.state.dataSource}
             players={this.state.players}

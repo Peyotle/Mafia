@@ -20,7 +20,6 @@ class PlayerGameplayCell extends Component {
         <PlayerView name={this.props.rowData.name} role={this.props.rowData.role} hideInfo={this.props.hideInfo}/>
         <KillButton
           isAlive={this.props.rowData.isAlive}
-          style={styles.roleButton}
           onPress={()=> this.props.onKill(this.props.rowData, this.props.rowID)}
         />
       </View>
@@ -57,18 +56,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
-  },
-  avatarView: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    borderColor: '#D7D7D7',
-    borderWidth: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  roleButton: {
-
   },
   cell: {
     flex: 1,

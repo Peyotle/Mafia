@@ -7,21 +7,12 @@ import {
   StyleSheet,
   AlertIOS
 } from 'react-native';
+import {Navigation} from 'react-native-navigation';
 
 var GameplayListView = require('./GameplayListView.js');
 var PlayersHelper = require('../PlayersHelper.js');
 
 class GameplayScreen extends Component {
-  static navigatorButtons = {
-    rightButtons: [
-      {
-        title: 'Hide Info',
-        id: 'info',
-        disabled: false,
-        disableIconTint: true
-      }
-    ]
-  };
 
   constructor(props) {
     super(props);
@@ -38,6 +29,8 @@ class GameplayScreen extends Component {
     if (event.type == 'NavBarButtonPress') {
       if (event.id == 'info') {
         this.onInfoButton();
+      } else if (event.id == 'time') {
+        this.onTimerButton();
       }
     }
   }
@@ -46,6 +39,16 @@ class GameplayScreen extends Component {
     this.setState ({hideInfo: !this.state.hideInfo});
   }
 
+  onTimerButton() {
+    Navigation.showLightBox({
+      screen: "mafia.MafiaTimer",
+      passProps: {},
+      style: {
+        backgroundBlur: "dark",
+        backgroundColor: "#00002280"
+      }
+    });
+  }
 
   updatePlayers(players, completion) {
     this.setState ({
@@ -97,8 +100,14 @@ class GameplayScreen extends Component {
     this.props.navigator.setButtons({
       rightButtons: [
         {
-          title: this.state.hideInfo ? 'Show Info' : 'Hide Info',
+          title: this.state.hideInfo ? 'Show' : 'Hide',
           id: 'info',
+          disabled: false,
+          disableIconTint: true
+        },
+        {
+          title: 'Time',
+          id: 'time',
           disabled: false,
           disableIconTint: true
         }
