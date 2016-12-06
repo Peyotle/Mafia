@@ -42,8 +42,9 @@ class RoleListView extends Component {
     return (
       <RoleSelectionCell
         player={rowData}
+        nextRole={this.nextRole(rowData.role)}
         rowID={rowID}
-      onPressRoleButton={this.onPressRoleButton.bind(this)} />
+        onPressRoleButton={this.onPressRoleButton.bind(this)} />
     );
   }
 

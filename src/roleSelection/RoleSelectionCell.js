@@ -16,6 +16,7 @@ class RoleSelectionCell extends Component {
 
   render() {
     const player = this.props.player;
+    const roleImage = this.roleButtonImage(this.props.nextRole);
     return(
       <View>
         <View style={styles.cell}>
@@ -26,20 +27,38 @@ class RoleSelectionCell extends Component {
           <TouchableHighlight onPress={()=> this.props.onPressRoleButton('evil', player, this.props.rowID)}>
             <Image
               style={styles.button}
-              source={{ uri: "Mafia_circle", isStatic: true }}
+              source={{ uri: roleImage, isStatic: true }}
             />
           </TouchableHighlight>
 
-          <TouchableHighlight onPress={()=> this.props.onPressRoleButton('good', player, this.props.rowID)}>
-            <Image
-              style={styles.button}
-              source={{ uri: "Innocent_circle", isStatic: true }}
-            />
-          </TouchableHighlight>
+          
         </View>
       </View>
     );
   }
+
+  roleButtonImage(role) {
+    switch (role) {
+      case 'none':
+      return "innocent_ic";
+        break;
+      case 'good':
+      return "mafia_ic";
+        break;
+      case 'evil':
+      return "don_ic";
+        break;
+      case 'evilMain':
+      return "sheriff_ic";
+        break;
+      case 'goodMain':
+      return "innocent_ic";
+        break;
+      default:
+      return "None_big_ic";
+    }
+  }
+
 }
 
 const styles = StyleSheet.create({
