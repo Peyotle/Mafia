@@ -9,11 +9,13 @@ import {
   StyleSheet,
   AlertIOS
 } from 'react-native';
+import EffectsView from 'react-native-effects-view';
 
 var Player = require('../Player.js');
 var RoleListView = require('./RoleListView');
 var globalStyles = require('../styles');
 var FlatButton = require('../UIComponents/FlatButton');
+
 
 class RoleSelectionScreen extends Component {
 
@@ -79,7 +81,16 @@ class RoleSelectionScreen extends Component {
             players={this.state.players}
             setPlayers={this.setPlayers.bind(this)}
           />
-          <FlatButton title='Start Game' onPress={this.onNextButton.bind(this)} />
+          <View style={styles.bottomView}>
+            <EffectsView
+                  blurStyle="dark"
+                   style={{position: 'absolute', height: 80, bottom: 0, left: 0, right: 0}}
+                  >
+              </EffectsView>
+            <FlatButton title='Start Game' onPress={this.onNextButton.bind(this)} />
+
+          </View>
+
       </View>
     );
   }
@@ -94,6 +105,9 @@ class RoleSelectionScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  bottomView: {
+    height: 100
   }
 });
 

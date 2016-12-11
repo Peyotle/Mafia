@@ -20,9 +20,9 @@ class FlatButton extends Component {
       <TouchableHighlight
         onPress={this.props.onPress}>
         <View style={styles.button}>
-        <Text style={styles.buttonText}>
-          {this.props.title}
-        </Text>
+          <Text style={styles.buttonText}>
+            {this.props.title}
+          </Text>
         </View>
       </TouchableHighlight>
     );
