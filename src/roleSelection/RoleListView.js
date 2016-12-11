@@ -50,13 +50,7 @@ class RoleListView extends Component {
 
   onPressRoleButton(buttonID, rowData, rowID) {
     var player: Player = rowData;
-    var role = player.role;
-
-    if (buttonID == 'good'){
-      role = (role == 'good') ? 'goodMain' : 'good';
-    }else{
-      role = (role == 'evil') ? 'evilMain' : 'evil';
-    }
+    let role = this.nextRole(player.role)
 
     var updatedPlayer = new Player(player.name, role);
     var newDs = this.state.players.slice();
@@ -75,7 +69,7 @@ class RoleListView extends Component {
   }
 
   nextRole(role: String) {
-    var roleIndex = roles.indexOf(role);
+    var roleIndex = (role == 'none') ? -1 : roles.indexOf(role);
     if (roleIndex < roles.length - 1) {
       return roles[roleIndex + 1];
     }

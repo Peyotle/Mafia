@@ -18,7 +18,6 @@ class RoleSelectionCell extends Component {
     const player = this.props.player;
     const roleImage = this.roleButtonImage(this.props.nextRole);
     return(
-      <View>
         <View style={styles.cell}>
           <PlayerView
             name={player.name}
@@ -30,29 +29,23 @@ class RoleSelectionCell extends Component {
               source={{ uri: roleImage, isStatic: true }}
             />
           </TouchableHighlight>
-
-          
         </View>
-      </View>
     );
   }
 
   roleButtonImage(role) {
     switch (role) {
-      case 'none':
-      return "innocent_ic";
-        break;
       case 'good':
-      return "mafia_ic";
+      return "innocent_ic";
         break;
       case 'evil':
-      return "don_ic";
+      return "mafia_ic";
         break;
       case 'evilMain':
-      return "sheriff_ic";
+      return "don_ic";
         break;
       case 'goodMain':
-      return "innocent_ic";
+      return "sheriff_ic";
         break;
       default:
       return "None_big_ic";
