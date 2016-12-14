@@ -98,7 +98,9 @@ class GameplayScreen extends Component {
   }
 
   render() {
-    let hideImage = { uri: "Stopwatch_selected", isStatic: true }
+    let hideImage = { uri: this.state.hideInfo ? 'Eye' : "Eye_selected", isStatic: true }
+    let timeImage = { uri: "Stopwatch_selected", isStatic: true }
+
     this.props.navigator.setButtons({
       rightButtons: [
         {
@@ -110,6 +112,7 @@ class GameplayScreen extends Component {
         },
         {
           title: 'Time',
+          icon: timeImage,
           id: 'time',
           disabled: false,
           disableIconTint: true
