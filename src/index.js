@@ -15,8 +15,8 @@ Navigation.startSingleScreenApp({
    navigatorStyle: {
      drawUnderNavBar: true,
      navBarTranslucent: true,
-     navBarTextColor: '#fff',
-     navBarButtonColor: '#f00',
+     navBarTextColor: '#14BBCD',
+     navBarButtonColor: '#14BBCD',
      statusBarTextColorScheme: 'light',
      screenBackgroundColor: '#001'
    }

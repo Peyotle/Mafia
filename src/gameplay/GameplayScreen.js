@@ -5,7 +5,8 @@ import {
   Text,
   View,
   StyleSheet,
-  AlertIOS
+  AlertIOS,
+  Image
 } from 'react-native';
 import {Navigation} from 'react-native-navigation';
 
@@ -97,10 +98,12 @@ class GameplayScreen extends Component {
   }
 
   render() {
+    let hideImage = { uri: "Stopwatch_selected", isStatic: true }
     this.props.navigator.setButtons({
       rightButtons: [
         {
           title: this.state.hideInfo ? 'Show' : 'Hide',
+          icon: hideImage,
           id: 'info',
           disabled: false,
           disableIconTint: true

@@ -7,7 +7,8 @@ import {
   View,
   StyleSheet,
   Image,
-  Animated
+  Animated,
+  LayoutAnimation
 } from 'react-native';
 
 class PlayerView extends Component {
@@ -101,7 +102,13 @@ class PlayerRoleImage extends Component {
         tension: 10,
       } ).start();  // Start the animation
     }
+
+    componentWillMount(){
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+    }
+
   }
+
 
   const styles = StyleSheet.create({
     container: {
