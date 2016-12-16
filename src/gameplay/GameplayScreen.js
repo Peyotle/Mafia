@@ -20,6 +20,7 @@ class GameplayScreen extends Component {
 
     this.state = {
       players: props.pushEvent,
+      deadPlayers: [],
       hideInfo: false
     };
 
@@ -51,9 +52,10 @@ class GameplayScreen extends Component {
     });
   }
 
-  updatePlayers(players, completion) {
+  updatePlayers(players, deadPlayers, completion) {
     this.setState ({
-      players: players
+      players: players,
+      deadPlayers: deadPlayers,
     }, completion);
   }
 
@@ -124,6 +126,7 @@ class GameplayScreen extends Component {
       <GameplayListView
         dataSource={this.state.dataSource}
         players={this.state.players}
+        deadPlayers={this.state.deadPlayers}
         onKill={this.onKill.bind(this)}
         updatePlayers={this.updatePlayers.bind(this)}
         hideInfo={this.state.hideInfo}

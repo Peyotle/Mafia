@@ -7,11 +7,49 @@ import {
   StyleSheet,
   Picker,
   StatusBar,
-  Image
+  Image,
+  Animated,
 } from 'react-native';
 
 var globalStyles = require('../styles');
 var FlatButton = require('../UIComponents/FlatButton');
+
+class TitleView extends Component {
+  constructor(props) {
+    super(props);
+    this.state={
+      animValue: new Animated.Value(0)
+    }
+  }
+
+  render() {
+    let viewStyle = [styles.titleImage, {marginTop: this.state.animValue.interpolate({ inputRange: [0, 1], outputRange: [0, 50], }), opacity: this.state.animValue}]
+    return(
+      <View style={styles.titleContainer}>
+        <Animated.Image
+          style={viewStyle}
+          source={{ uri: "Mask_welcome_page", isStatic: true }}
+          resizeMode='center'
+        />
+        <Animated.Text style={[styles.title, {marginTop: this.state.animValue.interpolate({ inputRange: [0, 1], outputRange: [0, 20] })}]}>
+          Select the number of players
+        </Animated.Text>
+      </View>
+    );
+  }
+
+  componentDidMount() {
+    this.animateTitleImage();
+  }
+
+  animateTitleImage() {
+    Animated.timing(
+      this.state.animValue,
+      {toValue: 1,
+      duration: 1000 }
+    ).start();
+  }
+}
 
 class GroupSizeScreen extends Component {
   constructor(props) {
@@ -36,16 +74,7 @@ class GroupSizeScreen extends Component {
     return(
       <View style={styles.container}>
         <StatusBar barStyle="light-content" />
-        <View style={styles.titleContainer}>
-          <Image
-            style={{width: 50, height: 50, margin: 10}}
-            source={{ uri: "Mafia_circle", isStatic: true }}
-          />
-          <Text style={styles.title}>
-            Select the number of players
-          </Text>
-        </View>
-
+        <TitleView />
         <Picker
             style={styles.picker}
             itemStyle={styles.pickerItem}
@@ -97,6 +126,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 40,
     justifyContent: 'center'
+  },
+  titleImage: {
+    width: 194,
+    height: 44,
+    margin: 10
   }
 });
 
